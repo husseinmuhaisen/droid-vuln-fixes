@@ -1,0 +1,26 @@
+{
+  "PreToolUse": [
+    {
+      "matcher": "Create|Edit|MultiEdit|ApplyPatch|Write|Execute",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "${DROID_PLUGIN_ROOT}/hooks/approval-gate.sh",
+          "timeout": 10
+        }
+      ]
+    }
+  ],
+  "UserPromptSubmit": [
+    {
+      "matcher": "*",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "${DROID_PLUGIN_ROOT}/hooks/record-approval.sh",
+          "timeout": 10
+        }
+      ]
+    }
+  ]
+}

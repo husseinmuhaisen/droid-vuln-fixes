@@ -1,0 +1,4 @@
+service: thumbnails
+provider:
+  name: aws
+  runtime: nodejs20.x

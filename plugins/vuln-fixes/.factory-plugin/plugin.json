@@ -1,0 +1,10 @@
+{
+  "name": "vuln-fixes",
+  "description": "Inventory and patch vulnerable PHP, Node.js and self-managed GitLab runtimes (or any runtime CVE) across repos: read-only inventory, enforced approval gate, tests before and after, one focused PR per repo.",
+  "version": "0.1.0",
+  "author": {
+    "name": "droid-vuln-fixes maintainers"
+  },
+  "license": "MIT",
+  "keywords": ["security", "remediation", "cve", "php", "nodejs", "gitlab"]
+}

@@ -1,0 +1,34 @@
+{
+  "id": "gitlab-2026-10-21",
+  "title": "GitLab critical patch release 19.5.1 (CVE-2026-110264)",
+  "runtime": "gitlab",
+  "published": "2026-10-21",
+  "line_key": "minor",
+  "affected_from": "7.0",
+  "fixed": {
+    "18.11": "18.11.13",
+    "19.0": "19.0.10",
+    "19.1": "19.1.9",
+    "19.2": "19.2.9",
+    "19.3": "19.3.6",
+    "19.4": "19.4.3",
+    "19.5": "19.5.1"
+  },
+  "unpatched_lines_note": "Every GitLab CE/EE line from 7.0 up to 18.10 is affected and has no backport. Upgrade along the official upgrade path to a fixed line.",
+  "cves": [
+    {"id": "CVE-2026-110264", "severity": "critical", "cvss": "10.0", "summary": "Unauthenticated remote code execution through an integer overflow when compiling a crafted regular expression", "lines": ["all from 7.0"]},
+    {"id": "CVE-2026-15723", "severity": "high", "summary": "OmniAuth-to-LDAP auto-linking account takeover"},
+    {"id": "CVE-2026-112212", "severity": "high", "summary": "Cache poisoning in OAuth/OIDC discovery endpoints"}
+  ],
+  "scope": "Self-managed only (Omnibus, Docker, Helm chart, Operator, source). GitLab.com is patched. GitLab Dedicated tenants on 19.3.5-internal0 and 19.4.2-internal0 or later already include the fixes. GitLab Runner is a separate product and not covered by this advisory.",
+  "notes": [
+    "Helm chart and Operator versions do not equal GitLab versions. Map them with the official chart version mappings before deciding status.",
+    "Follow the official upgrade path; jumping several minors can skip required background migrations.",
+    "GitLab published exploitation detections: Onigmo native worker crash, and Org mode render error burst."
+  ],
+  "sources": [
+    "https://docs.gitlab.com/releases/patches/patch-release-gitlab-19-5-1-released/",
+    "https://docs.gitlab.com/charts/installation/version_mappings/",
+    "https://docs.gitlab.com/update/upgrade_paths/"
+  ]
+}

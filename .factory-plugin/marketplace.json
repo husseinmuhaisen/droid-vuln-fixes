@@ -1,0 +1,16 @@
+{
+  "name": "droid-vuln-fixes",
+  "description": "Droid plugins for finding and patching critical runtime vulnerabilities across repositories.",
+  "owner": {
+    "name": "droid-vuln-fixes maintainers"
+  },
+  "plugins": [
+    {
+      "name": "vuln-fixes",
+      "description": "Inventory and patch vulnerable PHP, Node.js and self-managed GitLab runtimes (or any runtime CVE) across repos: read-only inventory, enforced approval gate, tests before and after, one focused PR per repo.",
+      "source": "./plugins/vuln-fixes",
+      "category": "security",
+      "tags": ["security", "remediation", "cve", "php", "nodejs", "gitlab"]
+    }
+  ]
+}

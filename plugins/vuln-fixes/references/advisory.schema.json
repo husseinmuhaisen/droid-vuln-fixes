@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "vuln-fixes advisory",
+  "type": "object",
+  "required": ["id", "title", "runtime", "published", "line_key", "fixed", "cves", "sources"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+    "title": {"type": "string"},
+    "runtime": {"type": "string", "description": "Short runtime/product name, e.g. node, php, gitlab, python, nginx."},
+    "published": {"type": "string", "format": "date"},
+    "line_key": {"enum": ["major", "minor"], "description": "Whether a release line is identified by MAJOR or MAJOR.MINOR."},
+    "affected_from": {"type": "string", "description": "Oldest affected line. Lines below it are reported not-affected."},
+    "fixed": {
+      "type": "object",
+      "description": "Release line -> smallest fixed full version on that line.",
+      "minProperties": 1,
+      "additionalProperties": {"type": "string", "pattern": "^[0-9]+(\\.[0-9]+){2}$"}
+    },
+    "unpatched_lines_note": {"type": "string"},
+    "cves": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "severity", "summary"],
+        "properties": {
+          "id": {"type": "string"},
+          "ghsa": {"type": "string"},
+          "severity": {"enum": ["critical", "high", "medium", "low"]},
+          "cvss": {"type": "string"},
+          "summary": {"type": "string"},
+          "lines": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "affected_deployments": {"type": "array", "items": {"type": "string"}},
+    "mitigations_not_fixes": {"type": "array", "items": {"type": "string"}},
+    "scope": {"type": "string"},
+    "notes": {"type": "array", "items": {"type": "string"}},
+    "sources": {"type": "array", "minItems": 1, "items": {"type": "string", "format": "uri"}}
+  }
+}

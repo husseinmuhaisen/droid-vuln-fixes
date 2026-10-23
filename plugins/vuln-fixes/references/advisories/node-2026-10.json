@@ -1,0 +1,36 @@
+{
+  "id": "node-2026-10-21",
+  "title": "Node.js October 21, 2026 security release",
+  "runtime": "node",
+  "published": "2026-10-21",
+  "line_key": "major",
+  "fixed": {
+    "22": "22.23.4",
+    "24": "24.22.1",
+    "26": "26.12.1"
+  },
+  "unpatched_lines_note": "Every release line without an entry in `fixed` (20 and older, and odd-numbered non-LTS lines such as 23 and 25) is end-of-life, still affected, and gets no fix. Upgrade to 22, 24 or 26.",
+  "cves": [
+    {"id": "CVE-2026-111497", "severity": "high", "summary": "Brotli decoder out-of-bounds write permits remote code execution", "lines": ["22", "24", "26"]},
+    {"id": "CVE-2026-105482", "severity": "high", "summary": "dns.resolve truncates names containing a NUL character", "lines": ["22", "24", "26"]},
+    {"id": "CVE-2026-105483", "severity": "high", "summary": "TLS certificate hostname bypass when the IP is written in fullwidth digits", "lines": ["24", "26"]},
+    {"id": "CVE-2026-106069", "severity": "high", "summary": "TLS certificate hostname bypass when the host loosely resolves to an IP address", "lines": ["22", "24", "26"]},
+    {"id": "CVE-2026-105481", "severity": "medium", "summary": "Keep-alive socket processes a response written before the request was sent", "lines": ["22", "24", "26"]},
+    {"id": "CVE-2026-106072", "severity": "medium", "summary": "Non-canonical IPv4 hostnames let DNS SANs authenticate IP endpoints", "lines": ["22", "24", "26"]},
+    {"id": "CVE-2026-106074", "severity": "medium", "summary": "crypto.randomUUID()/randomInt() entropy caches saved into startup snapshots and SEAs", "lines": ["22", "24", "26"]},
+    {"id": "CVE-2026-106070", "severity": "low", "summary": "ZipFile returns attacker-controlled prefix bytes after failed header validation", "lines": ["26"]},
+    {"id": "CVE-2026-106071", "severity": "low", "summary": "Permission Model filesystem over-grant via wildcard radix lookup", "lines": ["26"]},
+    {"id": "CVE-2026-106073", "severity": "low", "summary": "Permission Model bypass with fs.realpathSync", "lines": ["22", "24", "26"]}
+  ],
+  "notes": [
+    "Bundled dependency updates: c-ares (22/24/26), CA certificates with the eMudhra intermediate CA removed (22/24/26), OpenSSL (22/24), SQLite (22), Undici (22/24/26). Test outbound TLS after upgrading.",
+    "Prioritize internet-facing services that decompress Brotli (HTTP clients, servers, proxies, zlib.createBrotliDecompress) and TLS clients that connect to user-supplied hosts.",
+    "Electron apps, vendor images and appliances bundle their own Node.js; flag them for a vendor update instead of patching in place."
+  ],
+  "sources": [
+    "https://nodejs.org/en/blog/vulnerability/october-2026-security-releases",
+    "https://nodejs.org/en/blog/release/v22.23.4/",
+    "https://nodejs.org/en/blog/release/v24.22.1/",
+    "https://nodejs.org/en/blog/release/v26.12.1/"
+  ]
+}

@@ -1,0 +1,13 @@
+name: ci
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container: node:24.22.1-bookworm
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'

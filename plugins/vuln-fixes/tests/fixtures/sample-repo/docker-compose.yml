@@ -1,0 +1,7 @@
+services:
+  gitlab:
+    image: gitlab/gitlab-ee:19.4.2-ee.0
+  runner:
+    image: gitlab/gitlab-runner:v17.0.0
+  web:
+    image: node:lts-alpine3.20

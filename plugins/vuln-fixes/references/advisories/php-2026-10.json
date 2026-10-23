@@ -1,0 +1,35 @@
+{
+  "id": "php-2026-10-21",
+  "title": "PHP critical RCE security releases (CVE-2026-109618, CVE-2026-109619)",
+  "runtime": "php",
+  "published": "2026-10-21",
+  "line_key": "minor",
+  "fixed": {
+    "8.2": "8.2.35",
+    "8.3": "8.3.36",
+    "8.4": "8.4.27",
+    "8.5": "8.5.12"
+  },
+  "unpatched_lines_note": "PHP 8.1 and older get no release from the PHP project. Some distributions and LTS vendors ship backported fixes; the PHP security team also published minimal source backports for 7.4, 8.0 and 8.1. Otherwise upgrade to a supported line. PHP 8.2 reaches end of life on 31 December 2026.",
+  "cves": [
+    {"id": "CVE-2026-109618", "ghsa": "GHSA-w8hw-w9fx-j79w", "severity": "critical", "summary": "RCE via out-of-memory corruption: an OOM longjmp leaves partially initialized request memory that request shutdown then consumes", "lines": ["8.2", "8.3", "8.4", "8.5"]},
+    {"id": "CVE-2026-109619", "ghsa": "GHSA-6wmf-4rv5-p3rp", "severity": "critical", "summary": "RCE via stale global state: request-owned state survives into the next request on the same worker (use after free)", "lines": ["8.2", "8.3", "8.4", "8.5"]}
+  ],
+  "affected_deployments": ["Apache mod_php (highest risk, exploit runs before application code)", "PHP-FPM", "php-cgi", "FrankenPHP", "LiteSpeed (LSAPI)"],
+  "mitigations_not_fixes": [
+    "CVE-2026-109618: enforce memory_limit=-1 administratively (php_admin_value in the FPM pool or Apache config), keep post_max_size low (8M without uploads, 32M with), keep upload_max_filesize below post_max_size, and bound decoded body size, input fields, multipart parts, headers and nesting at the proxy, including requests without a usable Content-Length.",
+    "CVE-2026-109618: never use RLIMIT_AS or RLIMIT_DATA as a mitigation; they trigger the vulnerable allocation-failure path.",
+    "CVE-2026-109619: set session.upload_progress.enabled=0 in php.ini, the FPM pool or server config (not ini_set() or .user.ini) and restart every worker. On 8.5 also set fatal_error_backtraces=0. Remove invalid or deprecated per-request INI settings that emit diagnostics before request initialization; hiding diagnostics with error_reporting, display_errors or @ does not help."
+  ],
+  "notes": [
+    "Distro packages backport fixes without changing the upstream version string, so php -v is not evidence. Check the vendor's security tracker or package changelog.",
+    "The PHP project warned that rpms.remirepo.net would not have same-day updates; prefer distribution packages or source builds.",
+    "Changing Composer require.php or config.platform.php does not change the runtime and patches nothing.",
+    "Source builds must use the new php.net tarball and verify its published checksum."
+  ],
+  "sources": [
+    "https://www.php.net/archive/2026.php",
+    "https://github.com/php/php-src/security/advisories/GHSA-w8hw-w9fx-j79w",
+    "https://github.com/php/php-src/security/advisories/GHSA-6wmf-4rv5-p3rp"
+  ]
+}
